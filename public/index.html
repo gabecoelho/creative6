@@ -1,7 +1,12 @@
 <!doctype html>
 <html ng-app="myApp">
 <head>
-<!-- <script src="https://www.gstatic.com/firebasejs/3.5.3/firebase.js"></script>-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+
 <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
 <script>
   // Initialize Firebase
@@ -15,21 +20,48 @@
   };
   firebase.initializeApp(config);
 </script>
+
+<link rel="stylesheet" type="text/css" href="../stylesheets/style.css"/>
 <!-- AngularJS -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 <!-- AngularFire -->
 <script src="https://cdn.firebase.com/libs/angularfire/2.1.0/angularfire.min.js"></script>
   <script src="javascripts/script.js"></script>
+
+
+
+
   <script type="text/javascript">
+ 
+  
     /**
      * Function called when clicking the Login/Logout button.
      */
-    // [START buttoncallback]
+
+
+
+  $( document ).ready(function () {
+   // console.log(firebase.auth().currentUser);
+   // console.log("Hi, in document ready!")
+
+    //if (firebase.auth().currentUser) {
+      $('#hide').show();
+      //console.log("SHOW MY CHAT");
+    //}
+   // else {
+     // $('#hide').hide();
+    //  console.log("HIDE MY CHAT");
+  //  }
+
+  });
+
+  // [START buttoncallback]
     function toggleSignIn() {
       if (!firebase.auth().currentUser) {
         // [START createprovider]
+        console.log(firebase.auth().currentUser);
         var provider = new firebase.auth.GithubAuthProvider();
-        // [END createprovider]
+         // [END createprovider]
         // [START addscopes]
         provider.addScope('repo');
         // [END addscopes]
@@ -38,6 +70,7 @@
         // [END signin]
       } else {
         // [START signout]
+        console.log(firebase.auth().currentUser);
         firebase.auth().signOut();
         // [END signout]
       }
@@ -126,36 +159,41 @@
     window.onload = function () {
       initApp();
     };
+
   </script>
 
 </head>
 
-  <body my-app="">
- 
-  <div ng-show="data.show" id="test" ng-controller="chatController">
-  <form novalidate class="simple-form">
-    Name: <input type="text" ng-model="user.name" /><br />
-    Chat: <input type="text" ng-model="user.chat" /><br />
-    <input type="submit" ng-click="update(user)" value="Save" />
-  </form>
-  </div>
+  <body background="https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Background.2e16d0ba.fill-1422x800.jpg">
+    <h1 style="font-family: verdana" >Welcome to ChatApp</h1>
+<body>
   
-
-<button ng-model="data.show" disabled class="mdl-button mdl-js-button mdl-button--raised" id="quickstart-sign-in">Sign in with GitHub</button>
-
-  <ul>
+    <div id="hide" ng-controller="chatController">
+      <form novalidate class="simple-form">
+        Name:
+        <input type="text" class="form-control" style="width:30%" ng-model="user.name" />
+        <br /> Chat:
+        <input type="text" class="form-control" style="width:30%" ng-model="user.chat" />
+        <br />
+        <input type="submit" ng-click="update(user)" class="btn btn-success"   value="Save" /><br>
+      </form>
+  
+   <br><ul>
   <li ng-repeat='line in chats'>
   {{line.from}} - {{line.body}}
   </li>
   </ul>
+    </div>
 
+
+<button disabled class="mdl-button mdl-js-button mdl-button--raised btn btn-info" id="quickstart-sign-in"> Sign in with GitHub</button>
  
 
-<span ng-show="hide" id="quickstart-sign-in-status">Unknown</span>
+<span ng-show="lala" id="quickstart-sign-in-status">Unknown</span>
 <!-- <div>Firebase auth -->
   <!-- <code>currentUser</code> object value:</div> -->
-<div ng-show="hide"><pre><code id="quickstart-account-details">null</code></pre></div>
+<div ng-show="lala"><pre><code id="quickstart-account-details">null</code></pre></div>
 <!-- <div>GitHub OAuth Access Token:</div> -->
-<div ng-show="hide"><pre><code id="quickstart-oauthtoken">null</code></pre></div>
+<div ng-show="lala"><pre><code id="quickstart-oauthtoken">null</code></pre></div>
 </body>
 </html>
